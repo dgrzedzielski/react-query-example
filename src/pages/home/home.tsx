@@ -29,11 +29,11 @@ export function HomePage() {
         <div>
           <div>
             This is example app using <pre>react-query</pre> - this is codebase{' '}
-            <strong>before</strong> implementing <pre>react-query</pre>.
+            <strong>after</strong> implementing <pre>react-query</pre>.
           </div>
           <div>
-            To check codebase with already implemented <pre>react-query</pre>{' '}
-            check it on branch <pre>after</pre>
+            To check codebase without implemented <pre>react-query</pre> check
+            it on branch <pre>before</pre>
           </div>
           <div>
             You can go to{' '}
