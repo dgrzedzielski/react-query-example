@@ -1,39 +1,33 @@
 import React from 'react';
-import { Status } from 'core/types';
-import { fetchLocations } from 'modules/locations/http';
-import { LocationModel } from 'modules/locations/types';
+import { useQuery, useQueryClient } from 'react-query';
+import { LOCATIONS } from 'core/query-keys';
+import { fetchLocations, LocationsResponse } from 'modules/locations/http';
 
 export function useLocations() {
-  const [items, setItems] = React.useState<LocationModel[]>([]);
-  const [status, setStatus] = React.useState<Status>('initial');
-  const [error, setError] = React.useState<null | string>(null);
+  const queryClient = useQueryClient();
   const [page, setPage] = React.useState(1);
-  const [pageCount, setPageCount] = React.useState(1);
-
-  const fetchData = React.useCallback(async () => {
-    setStatus('loading');
-
-    try {
-      const { results, info } = await fetchLocations(page);
-      setItems(results);
-      setStatus('idle');
-      setPageCount(info.pages);
-    } catch (e) {
-      setError(e.error);
-      setStatus('error');
-    }
-  }, [page]);
+  const { data, status, error } = useQuery<LocationsResponse, string>(
+    [LOCATIONS, page],
+    () => fetchLocations(page),
+    { keepPreviousData: true, staleTime: 8000 }
+  );
 
   React.useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (data?.info.next) {
+      queryClient.prefetchQuery(
+        [LOCATIONS, page + 1],
+        () => fetchLocations(page + 1),
+        { staleTime: 8000 }
+      );
+    }
+  }, [data, queryClient]);
 
   return {
-    items,
+    items: data?.results || [],
+    pageCount: data?.info.pages || 1,
     status,
     error,
     page,
     setPage,
-    pageCount,
   };
 }

@@ -1,7 +1,25 @@
+import { useQueryClient } from 'react-query';
 import { BaseLink } from 'core/components/base/base-link';
+import { CHARACTERS, LOCATIONS } from 'core/query-keys';
+import { fetchCharacters } from 'modules/characters/http';
+import { fetchLocations } from 'modules/locations/http';
 import './home.scss';
 
+type DataType = typeof CHARACTERS | typeof LOCATIONS;
+
 export function HomePage() {
+  const queryClient = useQueryClient();
+
+  const prefetchData = async (dataType: DataType) => {
+    if (queryClient.getQueryData([dataType, 1])) return;
+
+    if (dataType === CHARACTERS)
+      queryClient.prefetchQuery([CHARACTERS, 1], () => fetchCharacters(1));
+
+    if (dataType === LOCATIONS)
+      queryClient.prefetchQuery([LOCATIONS, 1], () => fetchLocations(1));
+  };
+
   return (
     <section className="home-page__container">
       <header>
@@ -18,8 +36,22 @@ export function HomePage() {
             check it on branch <pre>after</pre>
           </div>
           <div>
-            You can go to <BaseLink to="/characters">🧍‍♀️🧍‍♂️ Characters</BaseLink>{' '}
-            and <BaseLink to="/locations">🗺 Locations</BaseLink>
+            You can go to{' '}
+            <BaseLink
+              to="/characters"
+              onMouseEnter={() => prefetchData(CHARACTERS)}
+              onFocus={() => prefetchData(CHARACTERS)}
+            >
+              🧍‍♀️🧍‍♂️ Characters
+            </BaseLink>{' '}
+            and{' '}
+            <BaseLink
+              to="/locations"
+              onMouseEnter={() => prefetchData(LOCATIONS)}
+              onFocus={() => prefetchData(LOCATIONS)}
+            >
+              🗺 Locations
+            </BaseLink>
           </div>
         </div>
       </div>

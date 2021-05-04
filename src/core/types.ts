@@ -1,4 +1,4 @@
-export type Status = 'initial' | 'loading' | 'fetching' | 'error' | 'idle';
+export type Status = 'loading' | 'fetching' | 'error' | 'idle' | 'success';
 
 export type ListResponse<T> = {
   info: {

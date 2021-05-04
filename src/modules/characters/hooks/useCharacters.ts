@@ -1,39 +1,33 @@
 import React from 'react';
-import { Status } from 'core/types';
-import { fetchCharacters } from 'modules/characters/http';
-import { Character } from 'modules/characters/types';
+import { useQuery, useQueryClient } from 'react-query';
+import { CHARACTERS } from 'core/query-keys';
+import { CharactersResponse, fetchCharacters } from 'modules/characters/http';
 
 export function useCharacters() {
-  const [items, setItems] = React.useState<Character[]>([]);
-  const [status, setStatus] = React.useState<Status>('initial');
-  const [error, setError] = React.useState<null | string>(null);
+  const queryClient = useQueryClient();
   const [page, setPage] = React.useState(1);
-  const [pageCount, setPageCount] = React.useState(1);
-
-  const fetchData = React.useCallback(async () => {
-    setStatus('loading');
-
-    try {
-      const { results, info } = await fetchCharacters(page);
-      setItems(results);
-      setStatus('idle');
-      setPageCount(info.pages);
-    } catch (e) {
-      setError(e.error);
-      setStatus('error');
-    }
-  }, [page]);
+  const { status, error, data } = useQuery<CharactersResponse, string>(
+    [CHARACTERS, page],
+    () => fetchCharacters(page),
+    { keepPreviousData: true, staleTime: 8000 }
+  );
 
   React.useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (data?.info.next) {
+      queryClient.prefetchQuery(
+        [CHARACTERS, page + 1],
+        () => fetchCharacters(page + 1),
+        { staleTime: 8000 }
+      );
+    }
+  }, [data, queryClient]);
 
   return {
-    items,
+    pageCount: data?.info?.pages || 1,
+    items: data?.results || [],
     status,
     error,
     page,
     setPage,
-    pageCount,
   };
 }

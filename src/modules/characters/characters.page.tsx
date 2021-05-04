@@ -5,7 +5,7 @@ import { CharactersItem } from 'modules/characters/components/characters-item';
 import { useCharacters } from 'modules/characters/hooks/useCharacters';
 
 export function CharactersPage() {
-  const { items, status, error, page, setPage, pageCount } = useCharacters();
+  const { items, pageCount, status, error, page, setPage } = useCharacters();
 
   return (
     <div>
