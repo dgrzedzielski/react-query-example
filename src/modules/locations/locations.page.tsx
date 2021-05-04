@@ -2,7 +2,7 @@ import { BaseFetchWrapper } from 'core/components/base/base-fetch-wrapper';
 import { BaseList } from 'core/components/base/base-list';
 import { BasePagination } from 'core/components/base/base-pagination';
 import { LocationsItem } from 'modules/locations/components/locations-item';
-import { useLocations } from 'modules/locations/hooks/useLocations';
+import { useLocations } from 'modules/locations/hooks/use-locations';
 
 export function LocationsPage() {
   const { page, setPage, pageCount, error, status, items } = useLocations();
