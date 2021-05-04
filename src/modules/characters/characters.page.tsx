@@ -2,7 +2,7 @@ import { BaseFetchWrapper } from 'core/components/base/base-fetch-wrapper';
 import { BaseList } from 'core/components/base/base-list';
 import { BasePagination } from 'core/components/base/base-pagination';
 import { CharactersItem } from 'modules/characters/components/characters-item';
-import { useCharacters } from 'modules/characters/hooks/useCharacters';
+import { useCharacters } from 'modules/characters/hooks/use-characters';
 
 export function CharactersPage() {
   const { items, status, error, page, setPage, pageCount } = useCharacters();
