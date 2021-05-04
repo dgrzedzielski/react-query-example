@@ -51,9 +51,23 @@ module.exports = {
           'index',
           'object',
         ],
+        'pathGroups': [
+          {
+            pattern: 'react*',
+            group: 'external',
+            position: 'before',
+          },
+          {
+            pattern: '@react*',
+            group: 'external',
+            position: 'before',
+          },
+        ],
+        'pathGroupsExcludedImportTypes': ['builtin']
       },
     ],
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
   }
 }

@@ -1,0 +1,22 @@
+@import 'styles/lib';
+
+.base-list {
+  --base-list-spacing: 15px;
+
+  display: flex;
+  padding: 0;
+  list-style: none;
+  flex-flow: row wrap;
+  margin-left: calc(var(--base-list-spacing)  * -1);
+  margin-right: calc(var(--base-list-spacing) * -1);
+  justify-content: space-evenly;
+
+  @include mq(lg) {
+    --base-list-spacing: 20px;
+    justify-content: space-between;
+  }
+
+  &__item {
+    margin: 0 var(--base-list-spacing) calc(var(--base-list-spacing) * 2);
+  }
+}

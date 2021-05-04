@@ -1,0 +1,52 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; // 1 rem = 10px;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--body-bg);
+  color: var(--text-color);
+  font-family: var(--font-family-base);
+  line-height: 1.5;
+  font-weight: var(--font-weight-base);
+  font-size: var(--font-size-base);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-headers);
+  color: var(--header-color);
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+pre {
+  display: inline-block;
+  background: var(--primary-extinguished);
+  padding: 0 4px;
+  border-radius: 4px;
+  margin: 0;
+  line-height: 1.45;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

@@ -1,0 +1,30 @@
+.base-link {
+  display: inline-block;
+  text-decoration: none;
+  position: relative;
+  color: var(--primary);
+  transition: 0.15s color;
+  font-weight: 700;
+  margin-left: 2px;
+  margin-right: 2px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    width: 100%;
+    height: 2px;
+    background: rgba(#fff, 0.25);
+    transition: 0.15s background-color;
+    border-radius: 2px;
+  }
+
+  &:hover {
+    // color: var(--header-color);
+
+    &::after {
+      background: var(--primary);
+    }
+  }
+}

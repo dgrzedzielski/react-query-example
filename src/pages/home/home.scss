@@ -1,0 +1,20 @@
+@import 'styles/lib';
+
+.home-page {
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    @include mq(lg) {
+      min-height: 800px;
+    }
+  }
+
+  &__info {
+    max-width: 455px;
+    line-height: 2;
+    font-size: 1.8rem;
+  }
+}

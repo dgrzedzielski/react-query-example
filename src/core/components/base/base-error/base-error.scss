@@ -1,0 +1,23 @@
+.base-error {
+  border-radius: 4px;
+  padding: 12px 24px;
+  background: var(--panel-bg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+
+  &::before {
+    content: '';
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--danger);
+  }
+
+  &__heading {
+    margin-bottom: 4px;
+    font-size: 1.8rem;
+  }
+}

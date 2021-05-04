@@ -1,0 +1,20 @@
+:root {
+  --body-bg: hsl(220, 13%, 17%);
+  --panel-bg: hsl(220, 13%, 20%);
+  --border-color: hsl(223, 10%, 25%);
+  --text-color: #eee;
+  --text-sub-color: #ccc;
+  --header-color: #fff;
+
+  --primary: #61dafb;
+  --primary-extinguished: #{rgba(#61dafb, 0.1)};
+  --danger: hsl(350, 100%, 50%) ;
+
+  --font-family-base: 'Nunito', sans-serif;
+  --font-weight-base: 300;
+  --font-size-base: 1.6rem;
+
+  --page-nav-height: 54px;
+
+  --border: 1px solid var(--border-color);
+}
